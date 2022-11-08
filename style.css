@@ -29,12 +29,13 @@ h2{
     justify-content:center;
     align-items:center;
     width:150px;
-    height:150px;
+    height:100px;
     border: 4px #000 solid;
     margin:10px;
     text-align: center;
-    line-height:30px;
-    padding-bottom:30px;}
+    line-height:40px;
+    padding-bottom:40px;
+}
 
 #tirar{
     margin-top: 10px;
