@@ -9,56 +9,67 @@ let three= `. <br> . <br> .`;
 let four=`. .<br>. .`;
 let five=`. .<br> . <br>. .`;
 let six =`. .<br>. .<br>. .`;
+
 let answer1="";
 let answer2="";
+let counter = 6;
+let rollingDices;
+
 dado1.innerHTML=one;
 dado2.innerHTML=one;
-tirar.addEventListener('click', (evento)=>{
-    let valorDado1=Math.ceil(Math.random()*6);
-    let valorDado2=Math.ceil(Math.random()*6);
-    let valorResultado= valorDado1+valorDado2;
-    switch (valorDado1) {
-      case 1:
-        answer1=one;
-        break;
-      case 2:
-        answer1=two;
-        break;
-      case 3:
-        answer1=three;
-        break;
-      case 4:
-        answer1=four;
-        break;
-      case 5:
-        answer1=five;
-        break;
-      case 6:
-        answer1=six;
-        break;
-    }
-    switch (valorDado2) {
-      case 1:
-        answer2=one;
-        break;
-      case 2:
-        answer2=two;
-        break;
-      case 3:
-        answer2=three;
-        break;
-      case 4:
-        answer2=four;
-        break;
-      case 5:
-        answer2=five;
-        break;
-      case 6:
-        answer2=six;
-        break;
-    }
 
-    dado1.innerHTML=answer1;
-    dado2.innerHTML=answer2;
-    resultado.innerHTML="Resultado = "+valorResultado;
-})
+const switchFunc = (valor) =>{
+  let answer='';
+  switch (valor) {
+    case 1:
+      answer=one;
+      break;
+    case 2:
+      answer=two;
+      break;
+    case 3:
+      answer=three;
+      break;
+    case 4:
+      answer=four;
+      break;
+    case 5:
+      answer=five;
+      break;
+    case 6:
+      answer=six;
+      break;
+  }
+  return answer;
+}
+
+function intervalFunc (){
+  tirar.disabled=true;
+
+  let valorDado1=Math.ceil(Math.random()*6);
+  let valorDado2=Math.ceil(Math.random()*6);
+  let valorResultado= valorDado1+valorDado2;
+
+  answer1 = switchFunc(valorDado1);
+  answer2 = switchFunc(valorDado2);
+
+  dado1.innerHTML=answer1;
+  dado2.innerHTML=answer2;
+  resultado.innerHTML= counter <=1 ? "Resultado = "+valorResultado: 'Loading...';
+
+  counter -= 1;
+  if(counter <=0) {
+    clearInterval(rollingDices)
+    tirar.disabled =false;
+    counter=6;
+  }
+}
+
+const rollDices = ()=>{
+   rollingDices = setInterval(intervalFunc, 200);
+}
+
+tirar.addEventListener('click', rollDices )
+
+
+
